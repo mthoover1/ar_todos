@@ -9,14 +9,14 @@ require 'faker'
 # end
 
 
-Tag.create(name: "Urgent")
-Tag.create(name: "Pressing")
-Tag.create(name: "Unimportant")
+# Tag.create(name: "Urgent")
+# Tag.create(name: "Pressing")
+# Tag.create(name: "Unimportant")
 
-Task.all.each do |task|
-  task.tags << Tag.all.sample
-  task.save
-end
+# Task.all.each do |task|
+#   task.tags << Tag.all.sample
+#   task.save
+# end
 
 
   # task = Task.new(name: 'Walk the dog')

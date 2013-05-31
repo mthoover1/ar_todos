@@ -22,6 +22,7 @@ end
 
 def delete_todo(id)
   Task.destroy(id)
+  TagCloud
 end
 
 def complete_todo(id)
@@ -40,6 +41,7 @@ def display_help_menu
     | add <list name> <task content>    =>Add a task to a specific list           |
     | delete <id>                       =>Delete a task from your list            |
     | complete <id>                     =>Complete a task on your list            |
+    | tag <id> <tag name>               =>Tag a task on your list                 |
     | help                              =>Disply list of commands                 |
      ------------------------------------------------------------------------------
     COMMANDS
@@ -56,7 +58,13 @@ if ARGV[0] == "add"
   list = List.find_or_create_by_name(ARGV[1])
   task = ARGV[2..-1].join(" ")
   add_todo(task, list.id)
-end 
+end
+
+if ARGV[0] == "tag"
+  tag = Tag.find_or_create_by_name(ARGV[2])
+  task = Task.find(ARGV[1])
+  task.tags << tag
+end
 
 delete_todo(ARGV[1]) if ARGV[0] == "delete"
 complete_todo(ARGV[1]) if ARGV[0] == "complete"
