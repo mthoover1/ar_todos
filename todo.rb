@@ -8,6 +8,14 @@ def all_todos
   end
 end
 
+def todos_for_list(id)
+  puts "List - #{List.find(id).name}"
+
+  List.find(id).tasks.all.each do |task|
+    puts "Task # #{task.id} | Task #{task.name} | Completed on #{task.completed_at}"
+  end
+end
+
 def add_todo(task, list)
   Task.create(name: task, list_id: list)
 end
@@ -21,7 +29,8 @@ def complete_todo(id)
 end 
 
 
-all_todos if ARGV[0] == 'list'
+all_todos if ARGV[0] == 'list' && ARGV.size == 1
+todos_for_list(List.find_by_name(ARGV[1]).id) if ARGV[0] == 'list' && ARGV.size > 1
 
 if ARGV[0] == "add"
   list = List.find_or_create_by_name(ARGV[1])
