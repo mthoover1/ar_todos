@@ -12,6 +12,9 @@ def add_todo(task)
   Task.create(name: task)
 end
 
+def delete_todo(id)
+  Task.destroy(id)
+end
 
 
 all_todos if ARGV[0] == 'list'
@@ -20,3 +23,5 @@ if ARGV[0] == "add"
   task = ARGV[1..-1].join(" ")
   add_todo(task)
 end 
+
+delete_todo(ARGV[1]) if ARGV[0] == "delete"
