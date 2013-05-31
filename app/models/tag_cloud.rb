@@ -1,4 +1,4 @@
-class Tag_Clouds < ActiveRecord::Base
-  belongs_to :tags
-  belongs_to :tasks
+class TagCloud < ActiveRecord::Base
+  belongs_to :tag
+  belongs_to :task
 end
