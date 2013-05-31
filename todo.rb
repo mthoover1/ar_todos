@@ -16,6 +16,10 @@ def delete_todo(id)
   Task.destroy(id)
 end
 
+def complete_todo(id)
+  Task.find(id).update_attribute(:completed_at, Time.now)
+end 
+
 
 all_todos if ARGV[0] == 'list'
 
@@ -25,3 +29,4 @@ if ARGV[0] == "add"
 end 
 
 delete_todo(ARGV[1]) if ARGV[0] == "delete"
+complete_todo(ARGV[1]) if ARGV[0] == "complete"
