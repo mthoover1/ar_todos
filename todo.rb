@@ -4,12 +4,12 @@ require_relative 'config/application'
 
 def all_todos
   Task.all.each do |task|
-    puts "#{task.id}. #{task.name} #{task.completed_at}"
+    puts "Task # #{task.id} | List # #{task.list_id} | Task #{task.name} | Completed on #{task.completed_at}"
   end
 end
 
-def add_todo(task)
-  Task.create(name: task)
+def add_todo(task, list)
+  Task.create(name: task, list_id: list)
 end
 
 def delete_todo(id)
@@ -24,8 +24,9 @@ end
 all_todos if ARGV[0] == 'list'
 
 if ARGV[0] == "add"
-  task = ARGV[1..-1].join(" ")
-  add_todo(task)
+  list = List.find_or_create_by_name(ARGV[1])
+  task = ARGV[2..-1].join(" ")
+  add_todo(task, list.id)
 end 
 
 delete_todo(ARGV[1]) if ARGV[0] == "delete"
