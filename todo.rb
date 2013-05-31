@@ -28,9 +28,29 @@ def complete_todo(id)
   Task.find(id).update_attribute(:completed_at, Time.now)
 end 
 
+def display_help_menu
+    prompt = <<-COMMANDS
+                             ----------------------------
+                            | WELCOME TO YOUR TODO LIST: |
+                             ----------------------------                            
+     ------------------------------------------------------------------------------                                                                              
+    | Here are your commands:                                                     |
+    | list                              =>List all of the tasks on your todo list |
+    | list <name>                       =>List all tasks from a specific list     |
+    | add <list name> <task content>    =>Add a task to a specific list           |
+    | delete <id>                       =>Delete a task from your list            |
+    | complete <id>                     =>Complete a task on your list            |
+    | help                              =>Disply list of commands                 |
+     ------------------------------------------------------------------------------
+    COMMANDS
+
+    puts prompt
+end
+
 
 all_todos if ARGV[0] == 'list' && ARGV.size == 1
 todos_for_list(List.find_by_name(ARGV[1]).id) if ARGV[0] == 'list' && ARGV.size > 1
+display_help_menu if ARGV[0] == 'help'
 
 if ARGV[0] == "add"
   list = List.find_or_create_by_name(ARGV[1])
