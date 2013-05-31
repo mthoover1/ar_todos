@@ -7,4 +7,3 @@ list_work = List.create(:name => 'Work')
   Task.create(:name => Faker::Lorem.sentence(word_count = 4), 
               :list_id => [list_wedding.id, list_work.id].sample)
 end
-
