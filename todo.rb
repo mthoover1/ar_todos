@@ -4,7 +4,7 @@ require_relative 'config/application'
 
 def all_todos
   Task.all.each do |task|
-    puts "Task # #{task.id} | List # #{task.list_id} | Task #{task.name} | Completed on #{task.completed_at}"
+    puts "Task # #{task.id} | List #{List.find(task.list_id).name} | Task #{task.name} | Completed on #{task.completed_at}"
   end
 end
 
